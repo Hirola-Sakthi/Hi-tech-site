@@ -1,0 +1,28 @@
+@tailwind base; @tailwind components; @tailwind utilities;
+html { background:#FAF9F6; color:#25252A; scroll-behavior:auto }
+body { font-family:'Manrope',sans-serif; font-size:.95rem; -webkit-font-smoothing:antialiased; overflow-x:hidden }
+p:not(.display) { font-size:1.06em }
+.display { font-family:'Barlow Condensed',sans-serif; font-weight:700; line-height:.92; letter-spacing:-.01em; text-transform:uppercase }
+.display.font-hero { font-family:'Bebas Neue',sans-serif; font-weight:400; letter-spacing:.01em }
+.bg-black { background-color:#FAF9F6!important; color:#25252A!important }
+.bg-charcoal { background-color:#EDE9E0!important; color:#25252A!important }
+.bg-black [class*="text-white"], .bg-charcoal [class*="text-white"],
+.bg-black[class*="text-white"], .bg-charcoal[class*="text-white"] { color:rgb(37 37 42 / var(--tw-text-opacity,1)) }
+.bg-black [class~="text-gold"], .bg-charcoal [class~="text-gold"],
+.bg-black[class~="text-gold"], .bg-charcoal[class~="text-gold"] { color:#98763B }
+.photo-copy { color:#fff!important }
+.photo-copy [class*="text-white"] { color:rgb(255 255 255 / var(--tw-text-opacity,1)) }
+.photo-copy [class~="text-gold"] { color:#C6A15B!important }
+:where(button, input, select, textarea, .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl, .shadow-2xl) { border-radius:.75rem }
+:where([class*="border"]:not([class~="border-t"]):not([class~="border-b"]):not([class~="border-l"]):not([class~="border-r"]):not([class~="border-x"]):not([class~="border-y"])) { border-radius:.75rem }
+.word { display:inline-block; overflow:hidden; vertical-align:top; padding-bottom:.08em }
+.char { display:inline-block; will-change:transform }
+:focus-visible { outline:3px solid #C6A15B; outline-offset:3px }
+.panel { transition:flex-grow .7s cubic-bezier(.2,.8,.2,1) }
+.panel:hover, .panel:focus-within { flex-grow:5 }
+.panel .panel-body { opacity:0; transform:translateY(16px); transition:all .5s .1s }
+.panel:hover .panel-body, .panel:focus-within .panel-body { opacity:1; transform:none }
+@media (max-width:1023px){ .panel .panel-body{opacity:1;transform:none} }
+@media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} }
+@keyframes testimonialProgress { from { transform:scaleX(0) } to { transform:scaleX(1) } }
+.animate-testimonial-progress { animation-name:testimonialProgress; animation-timing-function:linear; animation-fill-mode:forwards }

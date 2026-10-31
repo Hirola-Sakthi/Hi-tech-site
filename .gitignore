@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+frontstore/node_modules/
+server/node_modules/
+
+# Environment variables (secrets)
+.env
+.env.*
+frontstore/.env
+server/.env
+
+# Build files
+dist/
+build/
+frontstore/dist/
+server/dist/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/

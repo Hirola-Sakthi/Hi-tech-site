@@ -1,0 +1,937 @@
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  FaArrowLeft,
+  FaArrowRight,
+  FaPhoneAlt,
+  FaCheck,
+  FaQuoteLeft,
+} from "react-icons/fa";
+import {
+  gsap,
+  ScrollTrigger,
+  TLink,
+  SplitHeading,
+  RevealImage,
+  Parallax,
+  Counter,
+  reduced,
+} from "../components/motion.jsx";
+import { site, services, values, clients, approach } from "../config/site.js";
+
+const Btn = ({ to, children, dark }) => (
+  <TLink
+    to={to}
+    className={`group inline-flex items-center gap-3 px-8 py-4 font-display text-xl font-bold uppercase tracking-wide transition ${dark ? "bg-black text-gold hover:bg-white hover:text-black" : "bg-gold text-black hover:bg-white"}`}
+  >
+    {children}{" "}
+    <FaArrowRight className="text-base transition group-hover:translate-x-1.5" />
+  </TLink>
+);
+
+/* 1. HERO */
+function Hero() {
+  const ref = useRef(null);
+  const heroImages = [
+    "/images/team/p15.jpg",
+    "/images/team/p14.jpg",
+    "/images/team/p06.jpg",
+  ];
+  useLayoutEffect(() => {
+    if (reduced()) return;
+    const ctx = gsap.context(() => {
+      const slides = gsap.utils.toArray(".hero-slide");
+      gsap.set(slides.slice(1), { clipPath: "inset(100% 0 0 0)" });
+      gsap.from(slides, {
+        scale: 1.12,
+        duration: 3,
+        ease: "power3.out",
+        delay: 1.6,
+      });
+      const slideTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: ref.current,
+          pin: true,
+          scrub: 1,
+          start: "top top",
+          end: `+=${(slides.length - 1) * 1400}`,
+        },
+      });
+      slides.slice(1).forEach((slide) => {
+        slideTimeline.to(slide, {
+          clipPath: "inset(0% 0 0 0)",
+          duration: 1,
+          ease: "none",
+        });
+      });
+      gsap.from(".hero-sub", { y: 30, opacity: 0, duration: 1, delay: 2.6 });
+      gsap.from(".hero-rule", {
+        scaleX: 0,
+        transformOrigin: "left",
+        duration: 1.2,
+        ease: "power4.inOut",
+        delay: 2.4,
+      });
+    }, ref);
+    return () => ctx.revert();
+  }, []);
+  return (
+    <section
+      ref={ref}
+      className="relative flex min-h-screen items-end overflow-hidden bg-black"
+    >
+      {heroImages.map((src, index) => (
+        <img
+          key={src}
+          src={src}
+          alt=""
+          aria-hidden="true"
+          loading={index === 0 ? "eager" : "lazy"}
+          className="hero-slide absolute inset-0 h-full w-full object-cover"
+          style={{ clipPath: index ? "inset(100% 0 0 0)" : "inset(0 0 0 0)" }}
+        />
+      ))}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/30" />
+      <div className="absolute inset-y-0 left-0 w-1.5 bg-gold" />
+      <div className="photo-copy relative mx-auto w-full max-w-[1500px] px-5 pb-16 pt-40 lg:px-10 lg:pb-24">
+        <p className="mb-5 font-display text-sm font-bold uppercase tracking-[.24em] text-gold">
+          Trusted since 2008 <span className="mx-2 text-white/60">/</span> ISO
+          9001:2015 certified
+        </p>
+        <SplitHeading
+          as="h1"
+          text="Security you can trust."
+          trigger={false}
+          delay={1.7}
+          className="text-[10.3vw] sm:text-8xl lg:text-[5.6rem]"
+        />
+        <SplitHeading
+          as="p"
+          text="Protection you can rely on."
+          trigger={false}
+          delay={2.1}
+          className="text-[7vw] text-gold sm:text-6xl lg:text-[3.5rem]"
+        />
+        <div className="hero-rule mt-8 h-px w-40 bg-gold" />
+        <div className="hero-sub mt-8 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <p className="max-w-xl text-xl leading-relaxed text-white/85">
+            Disciplined security guard services for hotels, banks, offices,
+            factories, commercial buildings and apartments, managed by Ex-Army
+            personnel.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <Btn to="/contact">Get a Quote</Btn>
+            <Btn to="/services" dark>
+              Our Services
+            </Btn>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* 2. BRAND INTRODUCTION */
+function Intro() {
+  return (
+    <section className="grid items-center gap-10 bg-black px-5 py-16 lg:grid-cols-2 lg:gap-16 lg:px-10 lg:py-24">
+      <div className="relative min-h-[30rem] overflow-hidden bg-gold shadow-[0_24px_70px_rgba(37,37,42,.14)] lg:min-h-[40rem]">
+        <RevealImage
+          src="/images/team/guard-cover.jpg"
+          alt="HI-TECH security guard in uniform holding a radio"
+          from="bottom"
+          className="absolute inset-0"
+          imgClass="mix-blend-multiply object-top"
+        />
+        <div className="absolute bottom-5 left-5 border-l-2 border-gold bg-white/95 px-5 py-4 shadow-lg sm:bottom-8 sm:left-8">
+          <p className="display text-2xl text-charcoal">
+            Professional protection
+          </p>
+          <p className="mt-1 text-sm text-charcoal/70">
+            Managed by Ex-Army personnel
+          </p>
+        </div>
+      </div>
+      <div className="flex flex-col justify-center py-8 lg:py-12">
+        <p className="mb-4 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
+          A higher standard of care
+        </p>
+        <SplitHeading text="Who we are" className="text-6xl lg:text-8xl" />
+        <p className="mt-8 max-w-xl text-lg leading-relaxed text-charcoal/80">
+          HI-TECH PROTECTION SECURITY is a Bengaluru-based security management
+          company providing reliable, comprehensive protection for businesses,
+          institutions, residential communities and individuals.
+        </p>
+        <p className="mt-5 max-w-xl text-lg leading-relaxed text-charcoal/80">
+          Effective security requires more than a uniformed guard. It requires
+          training, vigilance, discipline, communication and quick response.
+        </p>
+        <div className="mt-10">
+          <Btn to="/about">About the company</Btn>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* 3. HISTORY / TIMELINE */
+function History() {
+  const ref = useRef(null);
+  useLayoutEffect(() => {
+    if (reduced()) return;
+    const ctx = gsap.context(() => {
+      gsap.from(".tl-line", {
+        scaleY: 0,
+        transformOrigin: "top",
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".tl",
+          start: "top 70%",
+          end: "bottom 70%",
+          scrub: true,
+        },
+      });
+      gsap.utils.toArray(".tl-item").forEach((el) =>
+        gsap.from(el, {
+          x: -60,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 80%" },
+        }),
+      );
+    }, ref);
+    return () => ctx.revert();
+  }, []);
+  const items = [
+    [
+      "2008",
+      "HI-TECH SECURITY FORCE is established",
+      "Operations across Karnataka, Tamil Nadu and Kerala, committed to professional, disciplined and dependable security services.",
+    ],
+    [
+      "Today",
+      "HI-TECH PROTECTION SECURITY",
+      "An associated entity of HI-TECH SECURITY FORCE, based in Bengaluru and dedicated to comprehensive protection solutions.",
+    ],
+    [
+      "Certified",
+      "ISO 9001:2015",
+      "An ISO 9001:2015 Certified Company, led by well-experienced, trained Ex-Army personnel.",
+    ],
+  ];
+  return (
+    <section ref={ref} className="bg-charcoal px-5 py-20 lg:px-10 lg:py-28">
+      <div className="mx-auto grid max-w-[1500px] gap-16 lg:grid-cols-12">
+        <div className="lg:col-span-5">
+          <p className="mb-4 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
+            A legacy of trust
+          </p>
+          <SplitHeading
+            text="Our story, from 2008"
+            className="text-6xl lg:text-8xl"
+          />
+          <RevealImage
+            src="/images/team/p14.jpg"
+            alt="HI-TECH security team in morning formation"
+            from="right"
+            className="mt-8 aspect-[4/3] shadow-xl"
+          />
+        </div>
+        <div className="tl relative lg:col-span-7 lg:pl-12">
+          <div className="tl-line absolute bottom-8 left-3 top-8 w-px bg-gold/60 lg:left-0" />
+          <ol className="space-y-6 pl-10 lg:pl-12">
+            {items.map(([k, t, d]) => (
+              <li
+                key={k}
+                className="tl-item relative border border-charcoal/10 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-8"
+              >
+                <span className="absolute -left-[3.15rem] top-3 h-5 w-5 rounded-full border-4 border-gold bg-charcoal lg:-left-[3.4rem]" />
+                <p className="display text-6xl text-gold">{k}</p>
+                <h3 className="mt-2 text-xl font-bold text-charcoal lg:text-2xl">
+                  {t}
+                </h3>
+                <p className="mt-3 max-w-xl text-lg leading-relaxed text-charcoal/75">
+                  {d}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* 4. STRENGTH (facts from the brochure only) */
+function Strength() {
+  const stats = [
+    [2008, "", "Year established"],
+    [3, "", "States of operation: Karnataka, Tamil Nadu, Kerala"],
+    [6, "", "Sectors protected"],
+    [10, "", "Named client brands"],
+  ];
+  return (
+    <Parallax
+      src="/images/team/p30.jpg"
+      alt="Security personnel on parade"
+      overlay="bg-black/80"
+      className="py-24 lg:py-36"
+    >
+      <div className="photo-copy mx-auto max-w-[1500px] px-5 lg:px-10">
+        <SplitHeading
+          text="Built on discipline"
+          className="mb-16 text-6xl lg:text-9xl"
+        />
+        <dl className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          {stats.map(([n, s, l]) => (
+            <div
+              key={l}
+              className="border-t border-gold/70 bg-black/20 p-6 pt-5 backdrop-blur-sm"
+            >
+              <dt className="display text-7xl text-gold lg:text-8xl">
+                <Counter to={n} suffix={s} />
+              </dt>
+              <dd className="mt-2 text-lg text-white/85">{l}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </Parallax>
+  );
+}
+
+/* 5. SERVICES: expanding panels */
+function Services() {
+  return (
+    <section className="bg-black py-20 lg:py-28">
+      <div className="mx-auto mb-14 flex max-w-[1500px] flex-col justify-between gap-6 px-5 lg:flex-row lg:items-end lg:px-10">
+        <div>
+          <p className="mb-4 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
+            Specialist teams for every environment
+          </p>
+          <SplitHeading
+            text="Professional security guard services"
+            className="max-w-4xl text-6xl lg:text-8xl"
+          />
+        </div>
+        <p className="max-w-sm text-lg leading-relaxed text-charcoal/75">
+          Trained security personnel for a wide range of establishments and
+          environments.
+        </p>
+      </div>
+      <div className="flex flex-col gap-3 px-5 lg:h-[68vh] lg:flex-row lg:gap-4 lg:px-10">
+        {services.map((s) => (
+          <TLink
+            key={s.slug}
+            to={`/services/${s.slug}`}
+            className="panel group relative min-h-[22rem] flex-1 overflow-hidden border border-charcoal/10 shadow-md transition duration-500 hover:shadow-xl lg:min-h-0"
+          >
+            <img
+              src={s.img}
+              alt={s.long}
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent transition duration-500 group-hover:from-black/95" />
+            <div className="photo-copy absolute inset-x-0 bottom-0 p-6 lg:p-8">
+              <h3 className="display text-4xl text-white lg:text-5xl">
+                {s.title}
+              </h3>
+              <div className="panel-body lg:w-[26rem]">
+                <p className="mt-3 text-base leading-relaxed text-white/85">
+                  {s.text}
+                </p>
+                <span className="mt-4 inline-flex items-center gap-2 font-display text-xl font-bold uppercase text-gold">
+                  Explore <FaArrowRight className="text-sm" />
+                </span>
+              </div>
+            </div>
+          </TLink>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* 6. FULL-WIDTH BANNER */
+function TrainingBanner() {
+  return (
+    <Parallax
+      src="/images/team/p06.jpg"
+      alt="Fire safety drill conducted for security personnel"
+      overlay="bg-gradient-to-r from-black/90 via-black/50 to-transparent"
+      className="flex min-h-[85vh] items-center"
+    >
+      <div className="photo-copy mx-auto w-full max-w-[1500px] px-5 lg:px-10">
+        <p className="mb-5 font-display text-sm font-bold uppercase tracking-[.22em] text-gold">
+          Prepared for the moments that matter
+        </p>
+        <SplitHeading
+          text="Alert. Trained. Ready to respond."
+          className="max-w-3xl text-6xl lg:text-9xl"
+        />
+        <p className="mt-6 max-w-lg text-xl text-white/85">
+          Our personnel are selected and trained to maintain a safe environment
+          while acting with professionalism and courtesy.
+        </p>
+      </div>
+    </Parallax>
+  );
+}
+
+/* 7. WHY CHOOSE */
+function Why() {
+  const pts = [
+    "Managed by well-experienced, trained Ex-Army personnel",
+    "Military discipline, alertness, responsibility and leadership in every operation",
+    "Personnel and practices suited to the specific nature of each location",
+    "An ISO 9001:2015 Certified Company",
+    "Operations across Karnataka, Tamil Nadu and Kerala since 2008",
+  ];
+  return (
+    <section className="overflow-hidden bg-beige text-charcoal">
+      <div className="mx-auto grid max-w-[1500px] items-center gap-10 px-5 lg:grid-cols-2 lg:px-10">
+        <div className="py-20 lg:py-32">
+          <p className="mb-4 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
+            The HI-TECH difference
+          </p>
+          <SplitHeading
+            text="Why choose HI-TECH"
+            className="text-6xl lg:text-8xl"
+          />
+          <ul className="mt-10 space-y-5">
+            {pts.map((p) => (
+              <li
+                key={p}
+                className="flex items-start gap-4 text-lg font-medium leading-relaxed"
+              >
+                <span className="mt-1 grid h-7 w-7 shrink-0 place-items-center bg-gold text-sm text-white shadow-sm">
+                  <FaCheck />
+                </span>
+                {p}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <RevealImage
+          src="/images/team/uniform-portrait.jpg"
+          alt="HI-TECH guard in grey uniform with radio"
+          from="right"
+          className="h-[26rem] min-h-0 self-center border border-charcoal/10 bg-white p-3 shadow-xl lg:h-[min(70vh,40rem)]"
+          imgClass="object-top mix-blend-multiply"
+        />
+      </div>
+    </section>
+  );
+}
+
+/* 8. APPROACH: large type rows */
+function Approach() {
+  const ref = useRef(null);
+  useLayoutEffect(() => {
+    if (reduced()) return;
+    const ctx = gsap.context(() => {
+      gsap.utils.toArray(".ap-row").forEach((r) => {
+        gsap.from(r.querySelector(".ap-word"), {
+          xPercent: -30,
+          opacity: 0,
+          duration: 1.1,
+          ease: "power4.out",
+          scrollTrigger: { trigger: r, start: "top 85%" },
+        });
+        gsap.from(r.querySelector(".ap-line"), {
+          scaleX: 0,
+          transformOrigin: "left",
+          duration: 1.2,
+          ease: "power4.inOut",
+          scrollTrigger: { trigger: r, start: "top 85%" },
+        });
+      });
+    }, ref);
+    return () => ctx.revert();
+  }, []);
+  return (
+    <section ref={ref} className="bg-black px-5 py-20 lg:px-10 lg:py-28">
+      <div className="mx-auto max-w-[1500px]">
+        <p className="mb-4 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
+          How we protect what matters
+        </p>
+        <SplitHeading
+          text="Our approach"
+          className="mb-10 text-3xl text-gold lg:text-5xl"
+        />
+        {approach.map(([w, d]) => (
+          <div key={w} className="ap-row group relative py-6">
+            <div className="ap-line absolute inset-x-0 top-0 h-px bg-charcoal/20" />
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+              <h3 className="ap-word display text-[13.2vw] leading-[.85] text-charcoal transition-colors duration-500 group-hover:text-gold lg:text-[7rem]">
+                {w}
+              </h3>
+              <p className="max-w-sm pb-4 text-lg leading-relaxed text-charcoal/75">
+                {d}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* 9. CORE VALUES */
+function Values() {
+  return (
+    <section className="bg-charcoal py-20 lg:py-28">
+      <div className="mx-auto grid max-w-[1500px] items-center gap-14 px-5 lg:grid-cols-2 lg:px-10">
+        <RevealImage
+          src="/images/industry/core-values.jpg"
+          alt="HI-TECH core values illustration"
+          from="left"
+          className="aspect-square border border-charcoal/10 bg-white p-3 shadow-xl"
+        />
+        <div>
+          <p className="mb-4 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
+            What guides every action
+          </p>
+          <SplitHeading
+            text="Discipline. Vigilance. Responsibility."
+            className="text-6xl lg:text-8xl"
+          />
+          <dl className="mt-10 divide-y divide-charcoal/10 border-y border-charcoal/10">
+            {values.map(([k, v]) => (
+              <div
+                key={k}
+                className="grid gap-1 py-5 sm:grid-cols-[13rem_1fr] sm:gap-6"
+              >
+                <dt className="display text-3xl text-gold">{k}</dt>
+                <dd className="text-lg text-charcoal/80">{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* 10. HORIZONTAL SCROLL: our people */
+function OnDuty() {
+  const wrap = useRef(null),
+    track = useRef(null);
+  useLayoutEffect(() => {
+    if (reduced()) return;
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 1024px)", () => {
+      const dist = () => track.current.scrollWidth - window.innerWidth;
+      gsap.to(track.current, {
+        x: () => -dist(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: wrap.current,
+          pin: true,
+          scrub: 1,
+          start: "top top",
+          end: () => "+=" + dist(),
+          invalidateOnRefresh: true,
+        },
+      });
+    });
+    return () => mm.revert();
+  }, []);
+  const shots = [
+    ["p23", "On post"],
+    ["p24", "Women guards on parade"],
+    ["p29", "Gate team"],
+    ["p17", "Morning formation"],
+    ["p31", "Site briefing"],
+    ["p12", "Fire drill"],
+    ["p03", "Hotel lobby team"],
+  ];
+  return (
+    <section
+      ref={wrap}
+      className="overflow-hidden bg-black py-20 lg:flex lg:h-screen lg:items-center lg:py-0"
+    >
+      <div
+        ref={track}
+        className="flex gap-6 overflow-x-auto px-5 pb-6 lg:w-max lg:items-center lg:gap-10 lg:overflow-visible lg:px-[8vw]"
+      >
+        <div className="w-[80vw] shrink-0 lg:w-[34vw]">
+          <p className="mb-4 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
+            People you can count on
+          </p>
+          <h2 className="display text-6xl lg:text-9xl">
+            Our people <span className="text-gold">on duty</span>
+          </h2>
+          <p className="mt-5 text-lg text-charcoal/70">
+            Real teams, real posts. Scroll to see them.
+          </p>
+        </div>
+        {shots.map(([f, c], i) => (
+          <figure
+            key={f}
+            className={`relative h-72 w-[78vw] shrink-0 overflow-hidden border border-charcoal/10 shadow-xl lg:h-[48vh] lg:max-h-[32rem] lg:w-[32vw] ${i % 2 ? "lg:translate-y-8" : "lg:-translate-y-8"}`}
+          >
+            <img
+              src={`/images/team/${f}.jpg`}
+              alt={c}
+              loading="lazy"
+              className="h-full w-full object-cover"
+            />
+            <figcaption className="absolute bottom-4 left-4 bg-white/95 px-4 py-2 font-display text-lg font-bold uppercase text-charcoal shadow-lg">
+              {c}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* 11. PERSONNEL SHOWCASE */
+function Personnel() {
+  return (
+    <section className="bg-white text-black">
+      <div className="mx-auto max-w-[1500px] px-5 pt-20 lg:px-10 lg:pt-28">
+        <div className="grid items-end gap-8 lg:grid-cols-2">
+          <div>
+            <p className="mb-4 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
+              A uniform that stands for trust
+            </p>
+            <SplitHeading
+              text="The uniform of trust"
+              className="text-6xl lg:text-9xl"
+            />
+          </div>
+          <p className="max-w-lg text-xl leading-relaxed text-charcoal">
+            Grey shirt, black trousers, the eagle emblem on the sleeve and the
+            HI-TECH badge on the chest. Every guard is identifiable, disciplined
+            and equipped for the post.
+          </p>
+        </div>
+      </div>
+      <RevealImage
+        src="/images/team/uniform-sheet.jpg"
+        alt="HI-TECH uniform shown from front, side and back"
+        from="bottom"
+        className="mx-auto mt-10 h-[clamp(18rem,27vw,30rem)] max-w-[1500px] border-y border-charcoal/10 bg-ivory px-5 py-6 lg:mt-14 lg:px-10"
+        imgClass="object-contain object-top"
+      />
+    </section>
+  );
+}
+
+/* 12. CLIENTS: marquee */
+function Clients() {
+  const ref = useRef(null);
+  useLayoutEffect(() => {
+    if (reduced()) return;
+    const ctx = gsap.context(() => {
+      gsap.to(".mq-a", {
+        xPercent: -50,
+        duration: 40,
+        ease: "none",
+        repeat: -1,
+      });
+      gsap.fromTo(
+        ".mq-b",
+        { xPercent: -50 },
+        { xPercent: 0, duration: 46, ease: "none", repeat: -1 },
+      );
+    }, ref);
+    return () => ctx.revert();
+  }, []);
+  const row = (cls, list) => (
+    <div
+      className="overflow-hidden"
+      style={{
+        maskImage:
+          "linear-gradient(to right, transparent, black 7%, black 93%, transparent)",
+        WebkitMaskImage:
+          "linear-gradient(to right, transparent, black 7%, black 93%, transparent)",
+      }}
+    >
+      <div className={`${cls} flex w-max gap-4 px-4 sm:gap-6 lg:gap-8`}>
+        {[...list, ...list].map(([n, f], i) => (
+          <div
+            key={`${f}-${i}`}
+            aria-hidden={i >= list.length}
+            className="grid h-28 w-48 shrink-0 place-items-center p-5 transition duration-300 hover:-translate-y-1 sm:h-32 sm:w-56 sm:p-6"
+          >
+            <img
+              src={`/images/clients/${f}.webp`}
+              alt={i < list.length ? n : ""}
+              loading="lazy"
+              className="h-[4.5rem] w-full min-w-0 object-contain sm:h-20"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  return (
+    <section
+      ref={ref}
+      className="overflow-hidden border-y border-charcoal/10 bg-charcoal py-20 sm:py-24 lg:py-28"
+    >
+      <div className="mx-auto mb-12 flex max-w-[1500px] flex-col gap-3 px-5 sm:mb-14 lg:px-10">
+        <p className="font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
+          Trusted partnerships
+        </p>
+        <SplitHeading
+          text="Brands that trust us"
+          className="text-5xl lg:text-7xl"
+        />
+        <p className="max-w-xl text-base leading-relaxed text-charcoal/70">
+          Proud to support businesses and organisations across India.
+        </p>
+      </div>
+      <div className="space-y-4 sm:space-y-6">
+        {row("mq-a", clients.slice(0, 5))}
+        {row("mq-b", clients.slice(5))}
+      </div>
+    </section>
+  );
+}
+
+/* 13. CLIENT TESTIMONIAL */
+function Testimonial() {
+  const ref = useRef(null);
+  const quoteRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const testimonials = [
+    {
+      quote:
+        "The security team has brought a reassuring, professional presence to our workplace. Their courteous approach and dependable day-to-day support have helped our staff and visitors feel welcome.",
+      name: "Ananya Rao",
+      role: "Facilities Manager",
+      organisation: "Northstar Business Park",
+    },
+    {
+      quote:
+        "From visitor management to keeping a watchful eye on the premises, the team is consistent and professional. Communication has been clear, and support has been responsive whenever we have needed it.",
+      name: "Karan Mehta",
+      role: "Operations Director",
+      organisation: "Meridian Retail Group",
+    },
+    {
+      quote:
+        "The guards are attentive, approachable and respectful with residents and guests. Their steady presence at the entrances has helped make our community feel more organised and secure.",
+      name: "Priya Nair",
+      role: "Community Association Lead",
+      organisation: "Lakeview Residences",
+    },
+  ];
+
+  useLayoutEffect(() => {
+    if (reduced()) return;
+    const ctx = gsap.context(() => {
+      gsap.from(".testimonial-content", {
+        y: 28,
+        opacity: 0,
+        duration: 0.9,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ref.current, start: "top 78%", once: true },
+      });
+    }, ref);
+    return () => ctx.revert();
+  }, []);
+
+  useLayoutEffect(() => {
+    if (reduced() || !quoteRef.current) return;
+    gsap.fromTo(
+      quoteRef.current,
+      { y: 12, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.45, ease: "power2.out" },
+    );
+  }, [activeIndex]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.25 },
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible || paused || reduced()) return undefined;
+    const timer = window.setInterval(() => {
+      setActiveIndex((index) => (index + 1) % testimonials.length);
+    }, 7000);
+    return () => window.clearInterval(timer);
+  }, [isVisible, paused, testimonials.length]);
+
+  const changeSlide = (direction) => {
+    setActiveIndex(
+      (index) =>
+        (index + direction + testimonials.length) % testimonials.length,
+    );
+  };
+  const activeTestimonial = testimonials[activeIndex];
+
+  return (
+    <section
+      ref={ref}
+      className="overflow-hidden bg-ivory px-5 py-16 text-charcoal sm:py-20 lg:px-10 lg:py-24"
+      aria-label="Client testimonials"
+    >
+      <div
+        className="testimonial-content mx-auto max-w-[1200px]"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocus={() => setPaused(true)}
+        onBlur={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget)) {
+            setPaused(false);
+          }
+        }}
+      >
+        <div className="mb-8 flex flex-col justify-between gap-6 sm:mb-10 sm:flex-row sm:items-end">
+          <div>
+            <p className="mb-3 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
+              Client testimonials
+            </p>
+            <h2 className="display text-4xl text-charcoal sm:text-5xl">
+              Trust, in their words.
+            </h2>
+            <p className="mt-3 text-sm text-charcoal/55">
+              Illustrative placeholders — replace with approved client feedback.
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="mr-2 font-display text-sm font-bold uppercase tracking-wider text-charcoal/55">
+              {String(activeIndex + 1).padStart(2, "0")} /{" "}
+              {String(testimonials.length).padStart(2, "0")}
+            </span>
+            <button
+              type="button"
+              onClick={() => changeSlide(-1)}
+              aria-label="Previous testimonial"
+              className="grid h-11 w-11 place-items-center border border-charcoal/20 text-charcoal transition hover:border-gold hover:bg-gold hover:text-white"
+            >
+              <FaArrowLeft aria-hidden="true" className="text-sm" />
+            </button>
+            <button
+              type="button"
+              onClick={() => changeSlide(1)}
+              aria-label="Next testimonial"
+              className="grid h-11 w-11 place-items-center border border-charcoal/20 text-charcoal transition hover:border-gold hover:bg-gold hover:text-white"
+            >
+              <FaArrowRight aria-hidden="true" className="text-sm" />
+            </button>
+          </div>
+        </div>
+        <div
+          ref={quoteRef}
+          key={activeIndex}
+          className="relative grid min-h-[21rem] gap-6 overflow-hidden border border-charcoal/10 bg-white p-6 shadow-[0_18px_55px_rgba(37,37,42,.08)] sm:min-h-[19rem] sm:grid-cols-[auto_1fr] sm:gap-8 sm:p-9 lg:min-h-[18rem] lg:gap-10 lg:p-12"
+          role="group"
+          aria-roledescription="slide"
+          aria-label={`Testimonial ${activeIndex + 1} of ${testimonials.length}`}
+          aria-live="polite"
+        >
+          <div className="pointer-events-none absolute right-5 top-5 text-7xl text-gold/10 sm:right-8 sm:top-4 sm:text-9xl">
+            <FaQuoteLeft aria-hidden="true" />
+          </div>
+          <div className="z-10 grid h-12 w-12 place-items-center bg-gold text-white sm:h-14 sm:w-14">
+            <FaQuoteLeft aria-hidden="true" className="text-xl" />
+          </div>
+          <div className="z-10 flex flex-col justify-between gap-8">
+            <blockquote className="max-w-4xl font-body text-[clamp(1.05rem,2vw,1.4rem)] leading-[1.8] text-charcoal/85">
+              “{activeTestimonial.quote}”
+            </blockquote>
+            <footer className="flex flex-col gap-4 border-t border-charcoal/10 pt-5 sm:flex-row sm:items-center sm:gap-5">
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-beige font-display text-lg font-bold uppercase text-charcoal">
+                {activeTestimonial.name
+                  .split(" ")
+                  .map((part) => part[0])
+                  .join("")}
+              </span>
+              <div className="min-w-0">
+                <p className="font-display text-xl font-bold text-charcoal sm:text-2xl">
+                  {activeTestimonial.name}
+                </p>
+                <p className="mt-1 font-body text-sm leading-relaxed text-charcoal/60">
+                  {activeTestimonial.role}{" "}
+                  <span className="px-1 text-gold">|</span>{" "}
+                  {activeTestimonial.organisation}
+                </p>
+              </div>
+            </footer>
+          </div>
+        </div>
+        <div className="mt-8 h-px w-full overflow-hidden bg-charcoal/10">
+          <div
+            key={activeIndex}
+            className={`h-full origin-left bg-gold ${!isVisible || paused || reduced() ? "" : "animate-testimonial-progress"}`}
+            style={{ animationDuration: "7s" }}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* 14. ENQUIRY BANNER */
+function Enquiry() {
+  return (
+    <Parallax
+      src="/images/team/p13.jpg"
+      alt="Security team formation"
+      overlay="bg-black/75"
+      className="py-28 lg:py-44"
+    >
+      <div className="mx-auto max-w-[1500px] px-5 text-center lg:px-10">
+        <SplitHeading
+          text="Tell us what you need to protect"
+          className="mx-auto max-w-5xl text-5xl text-white lg:text-7xl"
+        />
+        <p className="mx-auto mt-6 max-w-xl text-xl text-white/85">
+          Every client has different security requirements. We will suggest
+          personnel and practices suited to your location.
+        </p>
+        <div className="mt-10 flex flex-wrap justify-center gap-4">
+          <Btn to="/contact">Request a quote</Btn>
+          <a
+            href={site.phoneHref}
+            className="inline-flex items-center gap-3 border-2 border-gold px-8 py-4 font-display text-xl font-bold uppercase text-[#C6A15B] transition hover:bg-gold hover:text-black focus-visible:bg-gold focus-visible:text-black"
+          >
+            <FaPhoneAlt className="text-base" />
+            {site.phone}
+          </a>
+        </div>
+      </div>
+    </Parallax>
+  );
+}
+
+export default function Home() {
+  useLayoutEffect(() => {
+    document.title =
+      "HI-TECH Protection Security | Security Guard Services, Bengaluru";
+    ScrollTrigger.refresh();
+  }, []);
+  return (
+    <>
+      <Hero />
+      <Intro />
+      <History />
+      <Strength />
+      <Services />
+      <TrainingBanner />
+      <Why />
+      <Approach />
+      <Values />
+      <OnDuty />
+      <Personnel />
+      <Clients />
+      <Testimonial />
+      <Enquiry />
+    </>
+  );
+}
