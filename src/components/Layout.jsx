@@ -127,6 +127,7 @@ function Loader() {
 function Navbar() {
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [solid, setSolid] = useState(false);
   const { pathname } = useLocation();
   const menu = useRef(null);
@@ -139,30 +140,34 @@ function Navbar() {
   useEffect(() => {
     setOpen(false);
     setServicesOpen(false);
+    setMobileServicesOpen(false);
   }, [pathname]);
   useLayoutEffect(() => {
-    if (!menu.current) return;
+    if (!open || !menu.current) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     const ctx = gsap.context(() => {
-      if (open)
-        gsap
-          .timeline()
-          .fromTo(
-            menu.current,
-            { clipPath: "circle(0% at 92% 4%)" },
-            {
-              clipPath: "circle(150% at 92% 4%)",
-              duration: 0.8,
-              ease: "power3.inOut",
-            },
-          )
-          .from(
-            ".m-link",
-            { yPercent: 110, stagger: 0.06, duration: 0.6, ease: "power3.out" },
-            "-=.35",
-          );
+      gsap
+        .timeline()
+        .fromTo(
+          menu.current,
+          { clipPath: "circle(0% at 92% 4%)" },
+          {
+            clipPath: "circle(150% at 92% 4%)",
+            duration: 0.8,
+            ease: "power3.inOut",
+          },
+        )
+        .from(
+          ".m-link",
+          { yPercent: 110, stagger: 0.06, duration: 0.6, ease: "power3.out" },
+          "-=.35",
+        );
     }, menu);
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      document.body.style.overflow = previousOverflow;
+    };
   }, [open]);
   const link = ({ isActive }) =>
     `relative py-2 text-[13px] font-medium tracking-wide transition-colors hover:text-gold ${isActive ? "text-gold" : solid ? "text-charcoal" : "text-white"}`;
@@ -267,7 +272,10 @@ function Navbar() {
       {open && (
         <div
           ref={menu}
-          className={`fixed inset-0 z-[60] flex flex-col justify-center overflow-y-auto bg-beige px-8 pb-10 pt-28 text-charcoal ${solid ? "xl:hidden" : "lg:hidden"}`}
+          role="dialog"
+          aria-label="Mobile navigation"
+          aria-modal="true"
+          className={`fixed inset-0 z-[60] flex flex-col gap-6 overflow-y-auto overscroll-contain bg-beige px-6 pb-[max(2rem,env(safe-area-inset-bottom))] pt-[calc(7rem+env(safe-area-inset-top))] text-charcoal sm:px-10 ${solid ? "xl:hidden" : "lg:hidden"}`}
         >
           <ul className="space-y-1">
             {[
@@ -278,26 +286,61 @@ function Navbar() {
               ["/blog", "Blog"],
               ["/contact", "Contact"],
             ].map(([to, t]) => (
-              <li key={to} className="overflow-hidden">
-                <TLink
-                  to={to}
-                  className="m-link display block text-5xl text-charcoal hover:text-gold"
-                >
-                  {t}
-                </TLink>
-              </li>
-            ))}
-          </ul>
-          <ul className="mt-6 space-y-2 border-l-4 border-gold pl-4 text-sm text-charcoal">
-            {services.map((s) => (
-              <li key={s.slug}>
-                <TLink to={`/services/${s.slug}`}>{s.long}</TLink>
+              <li key={to}>
+                <div className="flex items-center justify-between gap-4">
+                  <TLink
+                    to={to}
+                    onClick={() => setOpen(false)}
+                    className="m-link block py-2 font-body text-[clamp(1.4rem,5.5vw,2rem)] font-semibold leading-tight tracking-tight text-charcoal hover:text-gold"
+                  >
+                    {t}
+                  </TLink>
+                  {to === "/services" && (
+                    <button
+                      type="button"
+                      onClick={() => setMobileServicesOpen((expanded) => !expanded)}
+                      aria-expanded={mobileServicesOpen}
+                      aria-controls="mobile-services-submenu"
+                      aria-label={
+                        mobileServicesOpen
+                          ? "Collapse services"
+                          : "Expand services"
+                      }
+                      className="p-3 text-xl text-charcoal"
+                    >
+                      <FaChevronDown
+                        aria-hidden="true"
+                        className={`transition-transform ${
+                          mobileServicesOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                  )}
+                </div>
+                {to === "/services" && mobileServicesOpen && (
+                  <ul
+                    id="mobile-services-submenu"
+                    className="mb-3 ml-2 grid gap-1 border-l-2 border-gold py-1 pl-4 sm:grid-cols-2"
+                  >
+                    {services.map((service) => (
+                      <li key={service.slug}>
+                        <TLink
+                          to={`/services/${service.slug}`}
+                          onClick={() => setOpen(false)}
+                          className="block py-2 font-body text-lg font-medium text-charcoal/80 hover:text-gold"
+                        >
+                          {service.long}
+                        </TLink>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>
           <a
             href={site.phoneHref}
-            className="mt-8 inline-flex items-center justify-center gap-3 rounded-xl bg-gold px-6 py-4 font-display text-2xl font-bold text-black transition-colors hover:bg-white"
+            className="inline-flex items-center justify-center gap-3 rounded-xl bg-gold px-6 py-4 font-body text-lg font-bold text-black transition-colors hover:bg-white"
           >
             <FaPhoneAlt aria-hidden="true" className="text-lg" />
             {site.phone}
