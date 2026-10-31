@@ -49,6 +49,31 @@ function Curtain() {
   );
 }
 
+function LoaderContent() {
+  return (
+    <>
+      <img
+        src="/images/brand/logo.png"
+        alt="HI-TECH Protection Security"
+        className="ld-logo w-72 max-w-[70vw]"
+      />
+      <div className="ld-bar mt-6 h-1 w-56 origin-left bg-gold" />
+    </>
+  );
+}
+
+export function PageLoader() {
+  return (
+    <div
+      role="status"
+      aria-label="Loading"
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black"
+    >
+      <LoaderContent />
+    </div>
+  );
+}
+
 function Loader() {
   const ref = useRef(null);
   const [done, setDone] = useState(
@@ -94,12 +119,7 @@ function Loader() {
       className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black"
       style={{ clipPath: "inset(0)" }}
     >
-      <img
-        src="/images/brand/logo.png"
-        alt="HI-TECH Protection Security"
-        className="ld-logo w-72 max-w-[70vw]"
-      />
-      <div className="ld-bar mt-6 h-1 w-56 origin-left bg-gold" />
+      <LoaderContent />
     </div>
   );
 }

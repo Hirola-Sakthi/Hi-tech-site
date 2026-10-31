@@ -1,29 +1,48 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import Layout from "./components/Layout.jsx";
-import Home from "./pages/Home.jsx";
-import Stub from "./pages/Stub.jsx";
-import About from "./pages/About.jsx";
-import Services from "./pages/Services.jsx";
-import ServicePage from "./pages/ServicePage.jsx";
-import Gallery from "./pages/Gallery.jsx";
-import Contact from "./pages/Contact.jsx";
-import Blog from "./pages/Blog.jsx";
-import BlogPost from "./pages/BlogPost.jsx";
-import { services } from "./config/site.js";
+import Layout, { PageLoader } from "./components/Layout.jsx";
+
+const Home = lazy(() => import("./pages/Home.jsx"));
+const Stub = lazy(() => import("./pages/Stub.jsx"));
+const About = lazy(() => import("./pages/About.jsx"));
+const Services = lazy(() => import("./pages/Services.jsx"));
+const ServicePage = lazy(() => import("./pages/ServicePage.jsx"));
+const Gallery = lazy(() => import("./pages/Gallery.jsx"));
+const Contact = lazy(() => import("./pages/Contact.jsx"));
+const Blog = lazy(() => import("./pages/Blog.jsx"));
+const BlogPost = lazy(() => import("./pages/BlogPost.jsx"));
+
+function NotFound() {
+  return <Stub title="Page not found" />;
+}
+
+function LazyRoute({ component: Component }) {
+  return (
+    <Suspense fallback={<PageLoader />}>
+      <Component />
+    </Suspense>
+  );
+}
 
 export default function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="services" element={<Services />} />
-        <Route path="services/:slug" element={<ServicePage />} />
-        <Route path="blog" element={<Blog />} />
-        <Route path="blog/:slug" element={<BlogPost />} />
-        <Route path="gallery" element={<Gallery />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="*" element={<Stub title="Page not found" />} />
+        <Route index element={<LazyRoute component={Home} />} />
+        <Route path="about" element={<LazyRoute component={About} />} />
+        <Route path="services" element={<LazyRoute component={Services} />} />
+        <Route
+          path="services/:slug"
+          element={<LazyRoute component={ServicePage} />}
+        />
+        <Route path="blog" element={<LazyRoute component={Blog} />} />
+        <Route path="blog/:slug" element={<LazyRoute component={BlogPost} />} />
+        <Route path="gallery" element={<LazyRoute component={Gallery} />} />
+        <Route path="contact" element={<LazyRoute component={Contact} />} />
+        <Route
+          path="*"
+          element={<LazyRoute component={NotFound} />}
+        />
       </Route>
     </Routes>
   );
