@@ -9,7 +9,7 @@ import {
 } from "../components/motion.jsx";
 import { EnquiryBanner } from "../components/ui.jsx";
 
-const T = (n) => `/images/team/p${String(n).padStart(2, "0")}.jpg`;
+const T = (n) => `/images/team/p${String(n).padStart(2, "0")}.webp`;
 const range = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
 const items = [
   ...[1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((n) => ({
@@ -32,13 +32,13 @@ const items = [
     ["uniform-full", "Full uniform and portrait"],
     ["uniform-portrait", "Guard in uniform"],
     ["guard-cover", "Guard with radio"],
-  ].map(([f, alt]) => ({ src: `/images/team/${f}.jpg`, cat: "Uniforms", alt })),
+  ].map(([f, alt]) => ({ src: `/images/team/${f}.webp`, cat: "Uniforms", alt })),
   ...[
     ["cards-lanyard", "Business card, ID card and lanyard"],
     ["mug", "Branded mug"],
     ["emblem", "Brand identity and emblem"],
   ].map(([f, alt]) => ({
-    src: `/images/brand/${f}.jpg`,
+    src: `/images/brand/${f}.webp`,
     cat: "Branding",
     alt,
   })),
@@ -92,9 +92,10 @@ export default function Gallery() {
   return (
     <>
       <Parallax
-        src="/images/team/p13.jpg"
+        src="/images/team/p13.webp"
         overlay="bg-black/70"
         className="flex min-h-[80vh] items-end"
+        loading="eager"
       >
         <div className="mx-auto w-full max-w-[1500px] px-5 pb-16 pt-44 lg:px-10">
           <SplitHeading
@@ -163,6 +164,7 @@ export default function Gallery() {
           <img
             src={list[open].src}
             alt={list[open].alt}
+            loading="eager"
             className="max-h-[88vh] max-w-full object-contain"
             onClick={(e) => e.stopPropagation()}
           />
@@ -198,7 +200,7 @@ export default function Gallery() {
           </button>
         </div>
       )}
-      <EnquiryBanner img="/images/team/p18.jpg" />
+      <EnquiryBanner img="/images/team/p18.webp" />
     </>
   );
 }

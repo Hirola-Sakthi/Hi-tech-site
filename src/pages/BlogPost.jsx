@@ -61,6 +61,8 @@ export default function BlogPost() {
         <img
           src={post.img}
           alt=""
+          loading="eager"
+          fetchPriority="high"
           className="bp-img absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20" />
@@ -126,6 +128,7 @@ export default function BlogPost() {
                 <img
                   src={p.img}
                   alt=""
+                  loading="lazy"
                   className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
@@ -137,7 +140,7 @@ export default function BlogPost() {
           </div>
         </div>
       </section>
-      <EnquiryBanner img="/images/team/p22.jpg" />
+      <EnquiryBanner img="/images/team/p22.webp" />
     </div>
   );
 }

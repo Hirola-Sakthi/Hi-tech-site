@@ -70,6 +70,8 @@ function Hero({ s, d }) {
           <img
             src={d.hero}
             alt={s.long}
+            loading="eager"
+            fetchPriority="high"
             className="absolute inset-0 h-[115%] w-full object-cover"
           />
         </div>
@@ -82,10 +84,10 @@ function Hero({ s, d }) {
         className={`relative flex min-h-screen items-end overflow-hidden ${d.theme === "light" ? "bg-white" : "bg-black"}`}
       >
         <div className="sh-img absolute inset-0 overflow-hidden">
-          <img src={d.hero} alt="" className="h-[115%] w-full object-cover" />
+          <img src={d.hero} alt="" loading="eager" fetchPriority="high" className="h-[115%] w-full object-cover" />
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-transparent" />
-        <div className="photo-copy relative mx-auto grid w-full max-w-[1500px] items-end gap-10 px-5 pb-16 pt-40 lg:grid-cols-[1.4fr_1fr] lg:px-10 lg:pb-24">
+        <div className="photo-copy relative mx-auto grid w-full max-w-[1500px] items-end gap-10 px-5 pb-16 pt-40 lg:grid-cols-[1.4fr_1fr] lg:px-10 lg:pb-20">
           <div>
             {title}
             {lead}
@@ -108,11 +110,13 @@ function Hero({ s, d }) {
         <img
           src={d.hero}
           alt={s.long}
+          loading="eager"
+          fetchPriority="high"
           className="h-[115%] w-full object-cover"
         />
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20" />
-      <div className="photo-copy relative mx-auto w-full max-w-[1500px] px-5 pb-16 pt-40 lg:px-10 lg:pb-24">
+      <div className="photo-copy relative mx-auto w-full max-w-[1500px] px-5 pb-16 pt-40 lg:px-10 lg:pb-20">
         {title}
         {lead}
       </div>
@@ -261,6 +265,7 @@ function Showcase({ slug, shots, s }) {
             key={p}
             src={p}
             alt=""
+            loading="lazy"
             className="cf absolute inset-0 h-full w-full object-cover"
           />
         ))}
@@ -280,6 +285,7 @@ function Showcase({ slug, shots, s }) {
             key={p}
             src={p}
             alt={cap[i]}
+            loading="lazy"
             className="sw absolute inset-0 h-full w-full object-cover"
           />
         ))}
@@ -311,6 +317,7 @@ function Showcase({ slug, shots, s }) {
               key={p}
               src={p}
               alt={cap[i]}
+              loading="lazy"
               className="h-72 w-[80vw] shrink-0 object-cover lg:h-[65vh] lg:w-[45vw]"
             />
           ))}
@@ -321,7 +328,7 @@ function Showcase({ slug, shots, s }) {
     return (
       <section
         ref={ref}
-        className="overflow-hidden bg-ivory px-5 py-20 sm:py-24 lg:px-10 lg:py-32"
+        className="overflow-hidden bg-ivory px-5 py-20 sm:py-20 lg:px-10 lg:py-32"
       >
         <div className="mx-auto max-w-[1280px]">
           <div className="mb-10 flex flex-col gap-5 border-b border-charcoal/15 pb-8 sm:mb-12 sm:flex-row sm:items-end sm:justify-between lg:pb-10">
@@ -382,7 +389,7 @@ function Showcase({ slug, shots, s }) {
     return (
       <section
         ref={ref}
-        className="bg-white px-5 py-24 text-black lg:px-10 lg:py-36"
+        className="bg-white px-5 py-20 text-black lg:px-10 lg:py-36"
       >
         <div className="mx-auto max-w-[1500px]">
           <SplitHeading
@@ -395,6 +402,7 @@ function Showcase({ slug, shots, s }) {
                 key={p}
                 src={p}
                 alt={cap[i]}
+                loading="lazy"
                 className={`ar aspect-[3/4] w-full rounded-t-[999px] object-cover ${i === 1 ? "md:mt-16" : ""}`}
               />
             ))}
@@ -478,7 +486,7 @@ export default function ServicePage() {
     <>
       <Hero s={s} d={d} />
       <section
-        className={`px-5 py-24 lg:px-10 lg:py-36 ${light ? "bg-white text-black" : "bg-black"}`}
+        className={`px-5 py-20 lg:px-10 lg:py-36 ${light ? "bg-white text-black" : "bg-black"}`}
       >
         <div className="mx-auto grid max-w-[1500px] gap-14 lg:grid-cols-12">
           <SplitHeading
@@ -496,7 +504,7 @@ export default function ServicePage() {
         </div>
       </section>
       <section
-        className={`px-5 pb-24 lg:px-10 lg:pb-36 ${light ? "bg-white text-black" : "bg-black"}`}
+        className={`px-5 pb-20 lg:px-10 lg:pb-36 ${light ? "bg-white text-black" : "bg-black"}`}
       >
         <div className="mx-auto max-w-[1500px]">
           <h2 className="display mb-10 text-4xl text-gold lg:text-6xl">
@@ -540,7 +548,7 @@ export default function ServicePage() {
         </div>
       </section>
       <Showcase slug={slug} shots={d.shots} s={s} />
-      <section className="bg-charcoal px-5 py-24 lg:px-10 lg:py-36">
+      <section className="bg-charcoal px-5 py-20 lg:px-10 lg:py-36">
         <div className="mx-auto max-w-[1500px]">
           <h2 className="display mb-12 text-5xl lg:text-7xl">How we work</h2>
           <div className="grid gap-10 lg:grid-cols-4">
@@ -555,7 +563,7 @@ export default function ServicePage() {
         </div>
       </section>
       <section
-        className={`px-5 py-24 lg:px-10 lg:py-36 ${light ? "bg-[#f3f1ec] text-black" : "bg-black"}`}
+        className={`px-5 py-20 lg:px-10 lg:py-36 ${light ? "bg-[#f3f1ec] text-black" : "bg-black"}`}
       >
         <div className="mx-auto grid max-w-[1500px] gap-14 lg:grid-cols-2">
           <div>
@@ -601,6 +609,7 @@ export default function ServicePage() {
               <img
                 src={o.img}
                 alt=""
+                loading="lazy"
                 className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-black/60 transition group-hover:bg-black/30" />

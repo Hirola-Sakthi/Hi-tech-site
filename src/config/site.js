@@ -20,42 +20,42 @@ export const services = [
     slug: "hotel-security",
     title: "Hotels",
     long: "Hotel Security",
-    img: "/images/industry/hotel.jpg",
+    img: "/images/industry/hotel.webp",
     text: "Professional security support for hotels, guest areas, entrances, parking zones and other critical areas, helping create a safe and welcoming environment for guests and staff.",
   },
   {
     slug: "bank-financial-security",
     title: "Banks & Financial Institutions",
     long: "Bank & Financial Institution Security",
-    img: "/images/industry/bank.jpg",
+    img: "/images/industry/bank.webp",
     text: "Security personnel trained to maintain vigilance at entrances, premises and sensitive areas while supporting access control and visitor management.",
   },
   {
     slug: "corporate-office-security",
     title: "Corporate Offices",
     long: "Corporate Office Security",
-    img: "/images/industry/corporate.jpg",
+    img: "/images/industry/corporate.webp",
     text: "Reliable security solutions for corporate offices, business parks and commercial establishments, including access monitoring, visitor management and premises surveillance.",
   },
   {
     slug: "industrial-security",
     title: "Factories & Industrial Units",
     long: "Industrial Security",
-    img: "/images/industry/industrial.jpg",
+    img: "/images/industry/industrial.webp",
     text: "Security support for industrial premises with a focus on gate control, employee and visitor verification, material movement and protection of valuable assets.",
   },
   {
     slug: "commercial-building-security",
     title: "Offices & Commercial Buildings",
     long: "Commercial Building Security",
-    img: "/images/industry/commercial.jpg",
+    img: "/images/industry/commercial.webp",
     text: "Professional guards to help protect employees, visitors, property and business assets while maintaining an organised and secure workplace.",
   },
   {
     slug: "residential-apartment-security",
     title: "Residential Apartments",
     long: "Residential Apartment Security",
-    img: "/images/industry/residential.jpg",
+    img: "/images/industry/residential.webp",
     text: "Security solutions for apartment communities, including entrance monitoring, visitor management, vehicle movement, common-area vigilance and overall premises security.",
   },
 ];
@@ -96,24 +96,24 @@ export const clients = [
 export const approach = [
   [
     "Assess",
-    "Every location has different requirements, so we begin by understanding the site, its people and its risks.",
+    "Every location has different requirements, so we begin by understanding the site, its people, daily routines and potential risks.",
   ],
   [
     "Prevent",
-    "Trained, vigilant personnel and clear procedures reduce risk before it becomes an incident.",
+    "Trained, vigilant personnel and clear procedures help identify concerns early and reduce risk before it becomes an incident.",
   ],
   [
     "Protect",
-    "Disciplined guards secure entrances, premises and assets with courtesy and professionalism.",
+    "Disciplined guards secure entrances, premises and assets with courtesy and professionalism, maintaining an alert and welcoming presence.",
   ],
   [
     "Respond",
-    "Communication and quick response, led by Ex-Army management, when something happens.",
+    "Clear communication and a prompt response, guided by Ex-Army management, help personnel act when something happens.",
   ],
 ];
 
 // Per-sector page content. Copy is derived from the E-Brochure wording; confirm with the company before launch.
-const T = (n) => `/images/team/p${String(n).padStart(2, "0")}.jpg`;
+const T = (n) => `/images/team/p${String(n).padStart(2, "0")}.webp`;
 export const sectorPages = {
   "hotel-security": {
     hero: T(3),

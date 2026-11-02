@@ -1,11 +1,12 @@
 import { TLink, SplitHeading } from "../components/motion.jsx";
 // Temporary page so every route in the navbar works. Replaced page by page after the homepage is approved.
-export default function Stub({ title, img = "/images/team/p15.jpg" }) {
+export default function Stub({ title, img = "/images/team/p15.webp" }) {
   return (
     <section className="relative grid min-h-screen place-items-center bg-charcoal px-6 text-center">
       <img
         src={img}
         alt=""
+        loading="eager"
         className="absolute inset-0 h-full w-full object-cover opacity-30"
       />
       <div className="relative">

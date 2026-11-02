@@ -1,5 +1,5 @@
 // General security guidance written for the blog. Review and edit before publishing; add dates when posts go live.
-const T = (n) => `/images/team/p${String(n).padStart(2, "0")}.jpg`;
+const T = (n) => `/images/team/p${String(n).padStart(2, "0")}.webp`;
 export const posts = [
   {
     slug: "how-to-choose-a-security-guard-agency",

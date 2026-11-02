@@ -85,6 +85,7 @@ export function RevealImage({
   className = "",
   imgClass = "",
   from = "left",
+  loading = "lazy",
 }) {
   const ref = useRef(null);
   useLayoutEffect(() => {
@@ -120,7 +121,8 @@ export function RevealImage({
       <img
         src={src}
         alt={alt}
-        loading="lazy"
+        loading={loading}
+        decoding="async"
         className={`h-full w-full object-cover ${imgClass}`}
       />
     </div>
@@ -134,6 +136,7 @@ export function Parallax({
   className = "",
   children,
   overlay = "bg-black/55",
+  loading = "lazy",
 }) {
   const ref = useRef(null);
   useLayoutEffect(() => {
@@ -161,7 +164,8 @@ export function Parallax({
       <img
         src={src}
         alt={alt}
-        loading="lazy"
+        loading={loading}
+        decoding="async"
         className="absolute inset-0 h-[125%] w-full -top-[12%] object-cover"
       />
       <div className={`absolute inset-0 ${overlay}`} />

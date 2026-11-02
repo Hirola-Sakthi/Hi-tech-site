@@ -38,7 +38,7 @@ export default function Contact() {
   return (
     <>
       <Parallax
-        src="/images/team/p28.jpg"
+        src="/images/team/p28.webp"
         overlay="bg-gradient-to-r from-black/75 via-black/45 to-black/20"
         className="flex min-h-[65vh] items-end"
       >
@@ -59,7 +59,7 @@ export default function Contact() {
           </p>
         </div>
       </Parallax>
-      <section className="bg-ivory px-5 py-16 lg:px-10 lg:py-24">
+      <section className="bg-ivory px-5 py-16 lg:px-10 lg:py-20">
         <div className="mx-auto grid max-w-[1280px] gap-8 lg:grid-cols-[1.15fr_.85fr] lg:gap-10">
           <div className="border border-charcoal/10 bg-white p-6 shadow-[0_20px_60px_rgba(37,37,42,.06)] sm:p-10 lg:p-12">
             <p className="mb-3 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
@@ -169,7 +169,7 @@ export default function Contact() {
           <aside className="flex flex-col gap-5">
             <div className="relative min-h-[18rem] overflow-hidden">
               <RevealImage
-                src="/images/team/p29.jpg"
+                src="/images/team/p29.webp"
                 alt="HI-TECH gate security team"
                 from="right"
                 className="absolute inset-0"
@@ -207,7 +207,7 @@ export default function Contact() {
                     <span className="display block text-xl text-charcoal">
                       {t}
                     </span>
-                    <span className="block break-all text-sm text-charcoal/70">
+                    <span className="mt-1 block break-all text-base text-charcoal/70">
                       {v}
                     </span>
                   </span>

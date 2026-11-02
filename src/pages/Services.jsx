@@ -43,7 +43,7 @@ export default function Services() {
   return (
     <>
       <Parallax
-        src="/images/team/p19.jpg"
+        src="/images/team/p19.webp"
         overlay="bg-gradient-to-t from-black via-black/60 to-black/40"
         className="flex min-h-screen items-end"
       >
@@ -129,7 +129,7 @@ export default function Services() {
           </section>
         );
       })}
-      <EnquiryBanner img="/images/team/p27.jpg" />
+      <EnquiryBanner img="/images/team/p27.webp" />
     </>
   );
 }

@@ -42,7 +42,7 @@ function Philosophy() {
   return (
     <section
       ref={ref}
-      className="relative grid min-h-[78vh] place-items-center overflow-hidden bg-black px-6 py-24 lg:px-16"
+      className="relative grid min-h-[78vh] place-items-center overflow-hidden bg-black px-6 py-20 lg:px-16"
     >
       <div className="absolute left-1/2 top-20 h-px w-24 -translate-x-1/2 bg-gold" />
       <div className="mx-auto max-w-6xl text-center">
@@ -166,9 +166,11 @@ export default function About() {
             delay={0.5}
             className="text-[14vw] lg:text-[8.9rem]"
           />
-          <p className="max-w-md text-2xl font-medium text-charcoal">
-            Professional, disciplined and dependable security services since
-            2008.
+          <p className="max-w-lg text-2xl font-medium leading-relaxed text-charcoal">
+            Professional, disciplined security services since 2008. Managed by
+            experienced Ex-Army personnel, our teams protect businesses,
+            institutions and residential communities across Karnataka, Tamil
+            Nadu and Kerala.
           </p>
         </div>
         <div className="relative min-h-[60vh] bg-gold">
@@ -178,8 +180,10 @@ export default function About() {
             ))}
           </div>
           <img
-            src="/images/team/guard-cover.jpg"
+            src="/images/team/guard-cover.webp"
             alt="HI-TECH guard in uniform"
+            loading="eager"
+            fetchPriority="high"
             className="ab-guard absolute inset-0 h-full w-full object-cover object-top mix-blend-multiply"
           />
         </div>
@@ -221,9 +225,9 @@ export default function About() {
 
       {/* 3 history */}
       <Parallax
-        src="/images/team/p14.jpg"
+        src="/images/team/p14.webp"
         overlay="bg-black/80"
-        className="py-24 lg:py-36"
+        className="py-16 lg:py-20"
       >
         <div className="mx-auto max-w-[1280px] px-5 lg:px-10">
           <p className="mb-4 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
@@ -241,7 +245,7 @@ export default function About() {
       </Parallax>
 
       {/* 4 leadership */}
-      <section className="bg-beige px-5 py-16 lg:px-10 lg:py-24">
+      <section className="bg-beige px-5 py-16 lg:px-10 lg:py-20">
         <div className="mx-auto grid max-w-[1280px] items-center gap-10 lg:grid-cols-[1.05fr_.95fr] lg:gap-16">
           <div className="py-6">
             <p className="mb-4 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
@@ -264,8 +268,9 @@ export default function About() {
                 Leadership
               </p>
               <img
-                src="/images/brand/emblem.jpg"
+                src="/images/brand/emblem.webp"
                 alt="HI-TECH Protection Security emblem"
+                loading="lazy"
                 className="mb-8 w-24"
               />
               <p className="display text-4xl text-charcoal sm:text-5xl">
@@ -327,13 +332,13 @@ export default function About() {
       <section className="grid bg-ivory lg:grid-cols-2">
         <div className="relative min-h-[28rem] overflow-hidden p-5 sm:p-8 lg:min-h-[42rem] lg:p-10">
           <RevealImage
-            src="/images/industry/core-values.jpg"
+            src="/images/industry/core-values.webp"
             alt="Core values"
             className="h-full min-h-[26rem] border border-charcoal/10 shadow-xl"
             from="top"
           />
         </div>
-        <div className="flex flex-col justify-center px-6 py-16 lg:px-16 lg:py-24">
+        <div className="flex flex-col justify-center px-6 py-16 lg:px-16 lg:py-20">
           <p className="mb-4 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
             The principles behind our promise
           </p>
@@ -379,7 +384,7 @@ export default function About() {
                 className={`group relative isolate overflow-hidden border border-white/80 bg-white p-1 shadow-md transition duration-500 hover:-translate-y-1 hover:shadow-xl sm:p-1.5 lg:p-2 ${c}`}
               >
                 <RevealImage
-                  src={`/images/team/${p}.jpg`}
+                  src={`/images/team/${p}.webp`}
                   alt={caption}
                   from={["left", "bottom", "right", "top"][i % 4]}
                   className="absolute inset-1 overflow-hidden sm:inset-1.5 lg:inset-2"
@@ -396,7 +401,7 @@ export default function About() {
       </section>
 
       {/* 9 ISO + CTA */}
-      <section className="bg-gold px-5 py-16 text-center text-black lg:py-24">
+      <section className="bg-gold px-5 py-16 text-center text-black lg:py-20">
         <p className="mb-5 font-display text-sm font-bold uppercase tracking-[.22em] text-charcoal/70">
           Quality you can rely on
         </p>
@@ -414,7 +419,7 @@ export default function About() {
           </Btn>
         </div>
       </section>
-      <EnquiryBanner img="/images/team/p22.jpg" />
+      <EnquiryBanner img="/images/team/p22.webp" />
     </div>
   );
 }

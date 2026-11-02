@@ -44,7 +44,7 @@ function Curtain() {
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 z-[90] hidden items-center justify-center bg-gold"
     >
-      <img src="/images/brand/logo.png" alt="" className="w-56" />
+      <img src="/images/brand/logo.png" alt="" loading="eager" className="w-56" />
     </div>
   );
 }
@@ -55,6 +55,7 @@ function LoaderContent() {
       <img
         src="/images/brand/logo.png"
         alt="HI-TECH Protection Security"
+        loading="eager"
         className="ld-logo w-72 max-w-[70vw]"
       />
       <div className="ld-bar mt-6 h-1 w-56 origin-left bg-gold" />
@@ -187,6 +188,7 @@ function Navbar() {
             <img
               src="/images/brand/logo.png"
               alt="HI-TECH Protection Security"
+              loading="eager"
               className={`max-w-full object-contain transition-all ${solid ? "h-12" : "h-16"}`}
             />
           </TLink>
@@ -291,7 +293,7 @@ function Navbar() {
                   <TLink
                     to={to}
                     onClick={() => setOpen(false)}
-                    className="m-link block py-2 font-body text-[clamp(1.4rem,5.5vw,2rem)] font-semibold leading-tight tracking-tight text-charcoal hover:text-gold"
+                    className="m-link block py-2 font-body text-[clamp(1.1rem,4.3vw,1.55rem)] font-semibold leading-tight tracking-tight text-charcoal hover:text-gold"
                   >
                     {t}
                   </TLink>
@@ -320,14 +322,14 @@ function Navbar() {
                 {to === "/services" && mobileServicesOpen && (
                   <ul
                     id="mobile-services-submenu"
-                    className="mb-3 ml-2 grid gap-1 border-l-2 border-gold py-1 pl-4 sm:grid-cols-2"
+                    className="mb-3 ml-2 grid gap-1 py-1 pl-4 sm:grid-cols-2"
                   >
                     {services.map((service) => (
                       <li key={service.slug}>
                         <TLink
                           to={`/services/${service.slug}`}
                           onClick={() => setOpen(false)}
-                          className="block py-2 font-body text-lg font-medium text-charcoal/80 hover:text-gold"
+                          className="block py-2 font-body text-base font-medium text-charcoal/80 hover:text-gold"
                         >
                           {service.long}
                         </TLink>
@@ -360,6 +362,7 @@ function Footer() {
           <img
             src="/images/brand/logo.png"
             alt="HI-TECH Protection Security"
+            loading="lazy"
             className="w-72"
           />
           <p className="mt-6 max-w-sm text-lg leading-relaxed">
@@ -435,8 +438,19 @@ function Footer() {
           </address>
         </div>
       </div>
-      <div className="border-t border-charcoal/15 py-6 text-center text-sm text-charcoal/70">
-        © {new Date().getFullYear()} HI-TECH Protection Security. {site.iso}.
+      <div className="border-t border-charcoal/15 px-5 py-6 text-center text-base text-charcoal/70">
+        <span>
+          © {new Date().getFullYear()} HI-TECH Protection Security. {site.iso}. All
+          rights reserved. Designed by{" "}
+        </span>
+        <a
+          href="https://hirolainfotech.com/"
+          target="_blank"
+          rel="noreferrer"
+          className="font-semibold text-charcoal transition-colors hover:text-gold"
+        >
+          Hirola InfoTech Solutions Pvt Ltd.
+        </a>
       </div>
     </footer>
   );

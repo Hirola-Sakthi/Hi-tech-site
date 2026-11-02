@@ -32,9 +32,9 @@ const Btn = ({ to, children, dark }) => (
 function Hero() {
   const ref = useRef(null);
   const heroImages = [
-    "/images/team/p15.jpg",
-    "/images/team/p14.jpg",
-    "/images/team/p06.jpg",
+    "/images/team/p15.webp",
+    "/images/team/p14.webp",
+    "/images/team/p06.webp",
   ];
   useLayoutEffect(() => {
     if (reduced()) return;
@@ -86,13 +86,15 @@ function Hero() {
           alt=""
           aria-hidden="true"
           loading={index === 0 ? "eager" : "lazy"}
+          fetchPriority={index === 0 ? "high" : "auto"}
+          decoding="async"
           className="hero-slide absolute inset-0 h-full w-full object-cover"
           style={{ clipPath: index ? "inset(100% 0 0 0)" : "inset(0 0 0 0)" }}
         />
       ))}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/30" />
       <div className="absolute inset-y-0 left-0 w-1.5 bg-gold" />
-      <div className="photo-copy relative mx-auto w-full max-w-[1500px] px-5 pb-16 pt-40 lg:px-10 lg:pb-24">
+      <div className="photo-copy relative mx-auto w-full max-w-[1500px] px-5 pb-16 pt-40 lg:px-10 lg:pb-20">
         <p className="mb-5 font-display text-sm font-bold uppercase tracking-[.24em] text-gold">
           Trusted since 2008 <span className="mx-2 text-white/60">/</span> ISO
           9001:2015 certified
@@ -133,14 +135,14 @@ function Hero() {
 /* 2. BRAND INTRODUCTION */
 function Intro() {
   return (
-    <section className="grid items-center gap-10 bg-black px-5 py-16 lg:grid-cols-2 lg:gap-16 lg:px-10 lg:py-24">
-      <div className="relative min-h-[30rem] overflow-hidden bg-gold shadow-[0_24px_70px_rgba(37,37,42,.14)] lg:min-h-[40rem]">
+    <section className="grid items-center gap-6 bg-black px-5 py-16 lg:grid-cols-2 lg:gap-8 lg:px-10 lg:py-20">
+      <div className="relative min-h-[28rem] overflow-hidden bg-[#FAF9F6]  lg:min-h-[34rem]">
         <RevealImage
-          src="/images/team/guard-cover.jpg"
+          src="/images/team/guard-cover.webp"
           alt="HI-TECH security guard in uniform holding a radio"
           from="bottom"
           className="absolute inset-0"
-          imgClass="mix-blend-multiply object-top"
+          imgClass="mix-blend-multiply !object-contain object-center"
         />
         <div className="absolute bottom-5 left-5 border-l-2 border-gold bg-white/95 px-5 py-4 shadow-lg sm:bottom-8 sm:left-8">
           <p className="display text-2xl text-charcoal">
@@ -155,15 +157,19 @@ function Intro() {
         <p className="mb-4 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
           A higher standard of care
         </p>
-        <SplitHeading text="Who we are" className="text-6xl lg:text-8xl" />
-        <p className="mt-8 max-w-xl text-lg leading-relaxed text-charcoal/80">
+        <SplitHeading text="Who we are" className="text-7xl lg:text-9xl" />
+        <p className="mt-8 max-w-2xl text-xl leading-relaxed text-charcoal/80">
           HI-TECH PROTECTION SECURITY is a Bengaluru-based security management
           company providing reliable, comprehensive protection for businesses,
-          institutions, residential communities and individuals.
+          institutions, residential communities and individuals. We are an
+          associated entity of HI-TECH SECURITY FORCE, with operations across
+          Karnataka, Tamil Nadu and Kerala.
         </p>
-        <p className="mt-5 max-w-xl text-lg leading-relaxed text-charcoal/80">
-          Effective security requires more than a uniformed guard. It requires
-          training, vigilance, discipline, communication and quick response.
+        <p className="mt-5 max-w-2xl text-xl leading-relaxed text-charcoal/80">
+          Effective security takes more than a uniformed presence. Our
+          personnel are selected and trained to support a safe environment
+          through vigilance, discipline, clear communication and professional,
+          courteous conduct.
         </p>
         <div className="mt-10">
           <Btn to="/about">About the company</Btn>
@@ -231,7 +237,7 @@ function History() {
             className="text-6xl lg:text-8xl"
           />
           <RevealImage
-            src="/images/team/p14.jpg"
+            src="/images/team/p14.webp"
             alt="HI-TECH security team in morning formation"
             from="right"
             className="mt-8 aspect-[4/3] shadow-xl"
@@ -272,10 +278,10 @@ function Strength() {
   ];
   return (
     <Parallax
-      src="/images/team/p30.jpg"
+      src="/images/team/p30.webp"
       alt="Security personnel on parade"
       overlay="bg-black/80"
-      className="py-24 lg:py-36"
+      className="py-16 lg:py-20"
     >
       <div className="photo-copy mx-auto max-w-[1500px] px-5 lg:px-10">
         <SplitHeading
@@ -357,7 +363,7 @@ function Services() {
 function TrainingBanner() {
   return (
     <Parallax
-      src="/images/team/p06.jpg"
+      src="/images/team/p06.webp"
       alt="Fire safety drill conducted for security personnel"
       overlay="bg-gradient-to-r from-black/90 via-black/50 to-transparent"
       className="flex min-h-[85vh] items-center"
@@ -414,7 +420,7 @@ function Why() {
           </ul>
         </div>
         <RevealImage
-          src="/images/team/uniform-portrait.jpg"
+          src="/images/team/uniform-portrait.webp"
           alt="HI-TECH guard in grey uniform with radio"
           from="right"
           className="h-[26rem] min-h-0 self-center border border-charcoal/10 bg-white p-3 shadow-xl lg:h-[min(70vh,40rem)]"
@@ -451,7 +457,7 @@ function Approach() {
     return () => ctx.revert();
   }, []);
   return (
-    <section ref={ref} className="bg-black px-5 py-20 lg:px-10 lg:py-28">
+    <section ref={ref} className="bg-black px-5 py-20 lg:px-10 lg:py-20">
       <div className="mx-auto max-w-[1500px]">
         <p className="mb-4 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
           How we protect what matters
@@ -463,11 +469,11 @@ function Approach() {
         {approach.map(([w, d]) => (
           <div key={w} className="ap-row group relative py-6">
             <div className="ap-line absolute inset-x-0 top-0 h-px bg-charcoal/20" />
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div className="flex flex-col gap-4 lg:grid lg:grid-cols-2 lg:items-end">
               <h3 className="ap-word display text-[13.2vw] leading-[.85] text-charcoal transition-colors duration-500 group-hover:text-gold lg:text-[7rem]">
                 {w}
               </h3>
-              <p className="max-w-sm pb-4 text-lg leading-relaxed text-charcoal/75">
+              <p className="max-w-lg pb-4 text-lg leading-relaxed text-charcoal/75">
                 {d}
               </p>
             </div>
@@ -484,10 +490,10 @@ function Values() {
     <section className="bg-charcoal py-20 lg:py-28">
       <div className="mx-auto grid max-w-[1500px] items-center gap-14 px-5 lg:grid-cols-2 lg:px-10">
         <RevealImage
-          src="/images/industry/core-values.jpg"
+          src="/images/industry/core-values.webp"
           alt="HI-TECH core values illustration"
           from="left"
-          className="aspect-square border border-charcoal/10 bg-white p-3 shadow-xl"
+          className="aspect-square border border-charcoal/10 bg-white p-3 shadow-xl lg:mx-auto lg:max-w-[40rem]"
         />
         <div>
           <p className="mb-4 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
@@ -520,23 +526,23 @@ function OnDuty() {
     track = useRef(null);
   useLayoutEffect(() => {
     if (reduced()) return;
-    const mm = gsap.matchMedia();
-    mm.add("(min-width: 1024px)", () => {
-      const dist = () => track.current.scrollWidth - window.innerWidth;
-      gsap.to(track.current, {
-        x: () => -dist(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: wrap.current,
-          pin: true,
-          scrub: 1,
-          start: "top top",
-          end: () => "+=" + dist(),
-          invalidateOnRefresh: true,
-        },
-      });
+    const dist = () => track.current.scrollWidth - window.innerWidth;
+    const tween = gsap.to(track.current, {
+      x: () => -dist(),
+      ease: "none",
+      scrollTrigger: {
+        trigger: wrap.current,
+        pin: true,
+        scrub: 1,
+        start: "top top",
+        end: () => "+=" + dist(),
+        invalidateOnRefresh: true,
+      },
     });
-    return () => mm.revert();
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+    };
   }, []);
   const shots = [
     ["p23", "On post"],
@@ -550,11 +556,11 @@ function OnDuty() {
   return (
     <section
       ref={wrap}
-      className="overflow-hidden bg-black py-20 lg:flex lg:h-screen lg:items-center lg:py-0"
+      className="flex min-h-screen items-center overflow-hidden bg-black py-12 lg:h-screen lg:py-0"
     >
       <div
         ref={track}
-        className="flex gap-6 overflow-x-auto px-5 pb-6 lg:w-max lg:items-center lg:gap-10 lg:overflow-visible lg:px-[8vw]"
+        className="flex w-max items-center gap-6 overflow-visible px-5 lg:gap-10 lg:px-[8vw]"
       >
         <div className="w-[80vw] shrink-0 lg:w-[34vw]">
           <p className="mb-4 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
@@ -573,7 +579,7 @@ function OnDuty() {
             className={`relative h-72 w-[78vw] shrink-0 overflow-hidden border border-charcoal/10 shadow-xl lg:h-[48vh] lg:max-h-[32rem] lg:w-[32vw] ${i % 2 ? "lg:translate-y-8" : "lg:-translate-y-8"}`}
           >
             <img
-              src={`/images/team/${f}.jpg`}
+              src={`/images/team/${f}.webp`}
               alt={c}
               loading="lazy"
               className="h-full w-full object-cover"
@@ -611,7 +617,7 @@ function Personnel() {
         </div>
       </div>
       <RevealImage
-        src="/images/team/uniform-sheet.jpg"
+        src="/images/team/uniform-sheet.webp"
         alt="HI-TECH uniform shown from front, side and back"
         from="bottom"
         className="mx-auto mt-10 h-[clamp(18rem,27vw,30rem)] max-w-[1500px] border-y border-charcoal/10 bg-ivory px-5 py-6 lg:mt-14 lg:px-10"
@@ -673,7 +679,7 @@ function Clients() {
   return (
     <section
       ref={ref}
-      className="overflow-hidden border-y border-charcoal/10 bg-charcoal py-20 sm:py-24 lg:py-28"
+      className="overflow-hidden border-y border-charcoal/10 bg-charcoal py-20 sm:py-20 lg:py-20"
     >
       <div className="mx-auto mb-12 flex max-w-[1500px] flex-col gap-3 px-5 sm:mb-14 lg:px-10">
         <p className="font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
@@ -777,7 +783,7 @@ function Testimonial() {
   return (
     <section
       ref={ref}
-      className="overflow-hidden bg-ivory px-5 py-16 text-charcoal sm:py-20 lg:px-10 lg:py-24"
+      className="overflow-hidden bg-ivory px-5 py-16 text-charcoal sm:py-20 lg:px-10 lg:py-20"
       aria-label="Client testimonials"
     >
       <div
@@ -793,84 +799,115 @@ function Testimonial() {
       >
         <div className="mb-8 flex flex-col justify-between gap-6 sm:mb-10 sm:flex-row sm:items-end">
           <div>
-            <p className="mb-3 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
+            <p className="mb-3 flex items-center gap-3 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
+              <span className="h-px w-10 bg-gold" />
               Client testimonials
             </p>
-            <h2 className="display text-4xl text-charcoal sm:text-5xl">
+            <h2 className="display text-4xl text-charcoal sm:text-5xl lg:text-6xl">
               Trust, in their words.
             </h2>
-            <p className="mt-3 text-sm text-charcoal/55">
+            <p className="mt-3 text-base text-charcoal/60 sm:text-lg">
               Illustrative placeholders — replace with approved client feedback.
             </p>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="mr-2 font-display text-sm font-bold uppercase tracking-wider text-charcoal/55">
-              {String(activeIndex + 1).padStart(2, "0")} /{" "}
-              {String(testimonials.length).padStart(2, "0")}
-            </span>
-            <button
-              type="button"
-              onClick={() => changeSlide(-1)}
-              aria-label="Previous testimonial"
-              className="grid h-11 w-11 place-items-center border border-charcoal/20 text-charcoal transition hover:border-gold hover:bg-gold hover:text-white"
-            >
-              <FaArrowLeft aria-hidden="true" className="text-sm" />
-            </button>
-            <button
-              type="button"
-              onClick={() => changeSlide(1)}
-              aria-label="Next testimonial"
-              className="grid h-11 w-11 place-items-center border border-charcoal/20 text-charcoal transition hover:border-gold hover:bg-gold hover:text-white"
-            >
-              <FaArrowRight aria-hidden="true" className="text-sm" />
-            </button>
           </div>
         </div>
         <div
           ref={quoteRef}
           key={activeIndex}
-          className="relative grid min-h-[21rem] gap-6 overflow-hidden border border-charcoal/10 bg-white p-6 shadow-[0_18px_55px_rgba(37,37,42,.08)] sm:min-h-[19rem] sm:grid-cols-[auto_1fr] sm:gap-8 sm:p-9 lg:min-h-[18rem] lg:gap-10 lg:p-12"
-          role="group"
-          aria-roledescription="slide"
-          aria-label={`Testimonial ${activeIndex + 1} of ${testimonials.length}`}
-          aria-live="polite"
+          className="relative isolate"
         >
-          <div className="pointer-events-none absolute right-5 top-5 text-7xl text-gold/10 sm:right-8 sm:top-4 sm:text-9xl">
-            <FaQuoteLeft aria-hidden="true" />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 translate-x-2 translate-y-2 rotate-[0.8deg] rounded-3xl bg-gold/80 sm:translate-x-3 sm:translate-y-3"
+          />
+          <div
+            className="relative grid -rotate-[0.35deg] overflow-hidden rounded-3xl border border-charcoal/10 bg-white shadow-[0_24px_70px_rgba(37,37,42,.1)] lg:grid-cols-[minmax(15rem,0.34fr)_1fr]"
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`Testimonial ${activeIndex + 1} of ${testimonials.length}`}
+            aria-live="polite"
+          >
+          <div className="relative min-h-64 overflow-hidden bg-beige sm:min-h-72 lg:min-h-[25rem]">
+            <img
+              src="/images/team/guard-cover.webp"
+              alt="HI-TECH security team member in uniform"
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover object-top mix-blend-multiply"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/35 via-transparent to-transparent" />
+            <span className="absolute bottom-5 left-5 border-l-2 border-gold bg-white/95 px-4 py-2 font-display text-sm font-bold uppercase tracking-wide text-charcoal">
+              HI-TECH Protection Security
+            </span>
           </div>
-          <div className="z-10 grid h-12 w-12 place-items-center bg-gold text-white sm:h-14 sm:w-14">
-            <FaQuoteLeft aria-hidden="true" className="text-xl" />
-          </div>
-          <div className="z-10 flex flex-col justify-between gap-8">
-            <blockquote className="max-w-4xl font-body text-[clamp(1.05rem,2vw,1.4rem)] leading-[1.8] text-charcoal/85">
-              “{activeTestimonial.quote}”
-            </blockquote>
-            <footer className="flex flex-col gap-4 border-t border-charcoal/10 pt-5 sm:flex-row sm:items-center sm:gap-5">
-              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-beige font-display text-lg font-bold uppercase text-charcoal">
-                {activeTestimonial.name
-                  .split(" ")
-                  .map((part) => part[0])
-                  .join("")}
+          <div className="relative flex min-w-0 flex-col justify-between gap-8 p-6 sm:p-9 lg:p-12">
+            <FaQuoteLeft
+              aria-hidden="true"
+              className="pointer-events-none absolute right-6 top-5 text-7xl text-gold/10 sm:right-10 sm:top-7 sm:text-9xl"
+            />
+            <div className="relative z-10">
+              <span className="mb-5 grid h-12 w-12 place-items-center bg-gold text-white shadow-sm">
+                <FaQuoteLeft aria-hidden="true" className="text-xl" />
               </span>
-              <div className="min-w-0">
-                <p className="font-display text-xl font-bold text-charcoal sm:text-2xl">
-                  {activeTestimonial.name}
-                </p>
-                <p className="mt-1 font-body text-sm leading-relaxed text-charcoal/60">
-                  {activeTestimonial.role}{" "}
-                  <span className="px-1 text-gold">|</span>{" "}
-                  {activeTestimonial.organisation}
-                </p>
+              <blockquote className="max-w-4xl font-body text-[clamp(1.1rem,2vw,1.65rem)] leading-relaxed text-charcoal/90">
+                “{activeTestimonial.quote}”
+              </blockquote>
+            </div>
+            <footer className="relative z-10 flex flex-col justify-between gap-6 border-t border-charcoal/10 pt-6 sm:flex-row sm:items-center">
+              <div className="flex min-w-0 items-center gap-4">
+                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-beige font-display text-lg font-bold uppercase text-charcoal">
+                  {activeTestimonial.name
+                    .split(" ")
+                    .map((part) => part[0])
+                    .join("")}
+                </span>
+                <div className="min-w-0">
+                  <p className="font-display text-xl font-bold text-charcoal sm:text-2xl">
+                    {activeTestimonial.name}
+                  </p>
+                  <p className="mt-1 font-body text-sm leading-relaxed text-charcoal/60 sm:text-base">
+                    {activeTestimonial.role}{" "}
+                    <span className="px-1 text-gold">|</span>{" "}
+                    {activeTestimonial.organisation}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 self-end sm:self-auto">
+                <span className="mr-2 font-display text-sm font-bold uppercase tracking-wider text-charcoal/55">
+                  {String(activeIndex + 1).padStart(2, "0")} /{" "}
+                  {String(testimonials.length).padStart(2, "0")}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => changeSlide(-1)}
+                  aria-label="Previous testimonial"
+                  className="grid h-12 w-12 place-items-center rounded-full border border-charcoal/15 bg-white text-charcoal shadow-sm transition hover:border-gold hover:bg-gold hover:text-white"
+                >
+                  <FaArrowLeft aria-hidden="true" className="text-sm" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => changeSlide(1)}
+                  aria-label="Next testimonial"
+                  className="grid h-12 w-12 place-items-center rounded-full bg-gold text-white shadow-[0_8px_20px_rgba(37,37,42,.15)] transition hover:bg-charcoal"
+                >
+                  <FaArrowRight aria-hidden="true" className="text-sm" />
+                </button>
               </div>
             </footer>
           </div>
+          </div>
         </div>
-        <div className="mt-8 h-px w-full overflow-hidden bg-charcoal/10">
-          <div
-            key={activeIndex}
-            className={`h-full origin-left bg-gold ${!isVisible || paused || reduced() ? "" : "animate-testimonial-progress"}`}
-            style={{ animationDuration: "7s" }}
-          />
+        <div className="mt-7 flex items-center justify-center gap-3" aria-label="Testimonial pagination">
+          {testimonials.map((testimonial, index) => (
+            <button
+              key={testimonial.name}
+              type="button"
+              onClick={() => setActiveIndex(index)}
+              aria-label={`Show testimonial ${index + 1}`}
+              aria-current={activeIndex === index ? "true" : undefined}
+              className={`h-2.5 rounded-full transition-all ${activeIndex === index ? "w-9 bg-gold" : "w-2.5 bg-gold/35 hover:bg-gold/70"}`}
+            />
+          ))}
         </div>
       </div>
     </section>
@@ -881,7 +918,7 @@ function Testimonial() {
 function Enquiry() {
   return (
     <Parallax
-      src="/images/team/p13.jpg"
+      src="/images/team/p13.webp"
       alt="Security team formation"
       overlay="bg-black/75"
       className="py-28 lg:py-44"
@@ -899,7 +936,7 @@ function Enquiry() {
           <Btn to="/contact">Request a quote</Btn>
           <a
             href={site.phoneHref}
-            className="inline-flex items-center gap-3 border-2 border-gold px-8 py-4 font-display text-xl font-bold uppercase text-[#C6A15B] transition hover:bg-gold hover:text-black focus-visible:bg-gold focus-visible:text-black"
+            className="inline-flex items-center gap-3 border-2 border-gold px-8 py-4 font-display text-xl font-bold uppercase text-[#C6A15B] transition hover:bg-gold hover:!text-black focus-visible:bg-gold focus-visible:!text-black"
           >
             <FaPhoneAlt className="text-base" />
             {site.phone}

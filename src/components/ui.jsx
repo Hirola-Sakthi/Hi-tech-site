@@ -14,7 +14,7 @@ export const Btn = ({ to, children, dark, light }) => (
 );
 
 export function EnquiryBanner({
-  img = "/images/team/p13.jpg",
+  img = "/images/team/p13.webp",
   title = "Tell us what you need to protect",
 }) {
   return (
@@ -32,7 +32,7 @@ export function EnquiryBanner({
           <Btn to="/contact">Request a quote</Btn>
           <a
             href={site.phoneHref}
-            className="inline-flex items-center gap-3 border-2 border-gold px-8 py-4 font-display text-xl font-bold uppercase text-gold transition hover:bg-gold hover:text-black"
+            className="inline-flex items-center gap-3 border-2 border-gold px-8 py-4 font-display text-xl font-bold uppercase text-gold transition hover:bg-gold hover:!text-black focus-visible:bg-gold focus-visible:!text-black"
           >
             <FaPhoneAlt className="text-base" />
             {site.phone}

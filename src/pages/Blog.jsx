@@ -51,7 +51,7 @@ export default function Blog() {
   return (
     <div ref={ref}>
       <Parallax
-        src="/images/team/p17.jpg"
+        src="/images/team/p17.webp"
         alt="HI-TECH security team on parade"
         overlay="bg-gradient-to-r from-black/85 via-black/55 to-black/20"
         className="flex min-h-[70vh] flex-col justify-end pt-36"
@@ -174,7 +174,7 @@ export default function Blog() {
           )}
         </div>
       </section>
-      <EnquiryBanner img="/images/team/p21.jpg" />
+      <EnquiryBanner img="/images/team/p21.webp" />
     </div>
   );
 }
