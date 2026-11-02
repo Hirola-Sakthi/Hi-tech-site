@@ -175,7 +175,7 @@ function Navbar() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 mx-auto transition-all duration-500 ${open ? "z-[70]" : "z-50"} ${solid ? "top-4 w-[80%] rounded-2xl border border-white/15 bg-ivory/95 py-2 shadow-xl backdrop-blur-md" : "top-0 w-full rounded-none bg-gradient-to-b from-black/80 to-transparent py-4"}`}
+        className={`fixed inset-x-0 mx-auto transition-all duration-500 ${open ? "z-[70]" : "z-50"} ${solid ? "top-4 w-[88%] rounded-2xl border border-white/15 bg-ivory/95 py-2 shadow-xl backdrop-blur-md sm:w-[80%]" : "top-0 w-full rounded-none bg-gradient-to-b from-black/80 to-transparent py-4"}`}
       >
         <div
           className={`mx-auto flex max-w-[1500px] items-center justify-between gap-3 ${solid ? "px-3 sm:px-5 xl:px-8" : "px-5 lg:px-10"}`}
@@ -230,7 +230,7 @@ function Navbar() {
                     <li key={s.slug}>
                       <TLink
                         to={`/services/${s.slug}`}
-                        className="block px-6 py-3 text-base font-medium hover:bg-black hover:text-gold"
+                        className="block px-6 py-3 text-lg font-medium hover:bg-black hover:text-gold"
                       >
                         {s.long}
                       </TLink>
@@ -329,7 +329,7 @@ function Navbar() {
                         <TLink
                           to={`/services/${service.slug}`}
                           onClick={() => setOpen(false)}
-                          className="block py-2 font-body text-base font-medium text-charcoal/80 hover:text-gold"
+                          className="block py-2 font-body text-lg font-medium text-charcoal/80 hover:text-gold"
                         >
                           {service.long}
                         </TLink>

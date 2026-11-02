@@ -43,9 +43,9 @@ function Hero() {
       gsap.set(slides.slice(1), { clipPath: "inset(100% 0 0 0)" });
       gsap.from(slides, {
         scale: 1.12,
-        duration: 3,
+        duration: 2.2,
         ease: "power3.out",
-        delay: 1.6,
+        delay: 0.4,
       });
       const slideTimeline = gsap.timeline({
         scrollTrigger: {
@@ -63,7 +63,7 @@ function Hero() {
           ease: "none",
         });
       });
-      gsap.from(".hero-sub", { y: 30, opacity: 0, duration: 1, delay: 2.6 });
+      gsap.from(".hero-sub", { y: 30, opacity: 0, duration: 1, delay: 1.5 });
       gsap.from(".hero-rule", {
         scaleX: 0,
         transformOrigin: "left",
@@ -103,14 +103,14 @@ function Hero() {
           as="h1"
           text="Security you can trust."
           trigger={false}
-          delay={1.7}
+          delay={0.8}
           className="text-[10.3vw] sm:text-8xl lg:text-[5.6rem]"
         />
         <SplitHeading
           as="p"
           text="Protection you can rely on."
           trigger={false}
-          delay={2.1}
+          delay={1.1}
           className="text-[7vw] text-gold sm:text-6xl lg:text-[3.5rem]"
         />
         <div className="hero-rule mt-8 h-px w-40 bg-gold" />
@@ -395,37 +395,40 @@ function Why() {
     "Operations across Karnataka, Tamil Nadu and Kerala since 2008",
   ];
   return (
-    <section className="overflow-hidden bg-beige text-charcoal">
-      <div className="mx-auto grid max-w-[1500px] items-center gap-10 px-5 lg:grid-cols-2 lg:px-10">
-        <div className="py-20 lg:py-32">
-          <p className="mb-4 font-display text-sm font-bold uppercase tracking-[.2em] text-gold">
+    <section className="relative isolate overflow-hidden bg-beige text-charcoal">
+      <div aria-hidden="true" className="pointer-events-none absolute -right-20 top-8 hidden h-[34rem] w-[34rem] rounded-full border-[2.5rem] border-charcoal/[.025] lg:block" />
+      <div className="mx-auto grid max-w-[1600px] items-stretch lg:min-h-[550px] lg:grid-cols-[1.04fr_.96fr]">
+        <div className="relative z-10 flex flex-col justify-center px-5 py-10 sm:px-10 lg:px-16 lg:py-10">
+          <p className="font-display text-sm font-bold uppercase tracking-[.24em] text-gold">
             The HI-TECH difference
           </p>
           <SplitHeading
             text="Why choose HI-TECH"
-            className="text-6xl lg:text-8xl"
+            className="mt-4 text-5xl text-black sm:text-6xl lg:text-[clamp(3.5rem,5.2vw,5.3rem)]"
           />
-          <ul className="mt-10 space-y-5">
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-charcoal/80 sm:text-xl">
+            Disciplined people. Thoughtful protection. Trusted since 2008.
+          </p>
+          <ul className="mt-7 grid max-w-2xl grid-cols-1 gap-x-8 rounded-2xl border border-charcoal/10 bg-white/45 p-5 shadow-sm sm:grid-cols-2 sm:p-6">
             {pts.map((p) => (
-              <li
-                key={p}
-                className="flex items-start gap-4 text-lg font-medium leading-relaxed"
-              >
-                <span className="mt-1 grid h-7 w-7 shrink-0 place-items-center bg-gold text-sm text-white shadow-sm">
-                  <FaCheck />
-                </span>
+              <li key={p} className="flex items-start gap-3 border-b border-charcoal/[.08] py-3 text-sm leading-relaxed text-charcoal/90 last:border-0 sm:text-[15px]">
+                <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-gold text-[10px] text-white"><FaCheck /></span>
                 {p}
               </li>
             ))}
           </ul>
         </div>
-        <RevealImage
-          src="/images/team/uniform-portrait.webp"
-          alt="HI-TECH guard in grey uniform with radio"
-          from="right"
-          className="h-[26rem] min-h-0 self-center border border-charcoal/10 bg-white p-3 shadow-xl lg:h-[min(70vh,40rem)]"
-          imgClass="object-top mix-blend-multiply"
-        />
+        <div className="relative min-h-[28rem] overflow-hidden rounded-r-xl bg-beige lg:min-h-full">
+          <div aria-hidden="true" className="pointer-events-none absolute right-8 top-8 z-10 hidden font-display text-[20rem] leading-none text-charcoal/[.045] lg:block">★</div>
+          <RevealImage
+            src="/images/team/guard-cover.webp"
+            alt="HI-TECH guard in grey uniform with radio"
+            from="right"
+            zoom={false}
+            className="absolute inset-0"
+            imgClass="!object-contain !object-bottom scale-[1.05] translate-y-[6%] mix-blend-multiply [mask-image:linear-gradient(to_bottom,black_0%,black_90%,transparent_100%)]"
+          />
+        </div>
       </div>
     </section>
   );

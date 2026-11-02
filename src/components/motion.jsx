@@ -86,6 +86,7 @@ export function RevealImage({
   imgClass = "",
   from = "left",
   loading = "lazy",
+  zoom = true,
 }) {
   const ref = useRef(null);
   useLayoutEffect(() => {
@@ -107,12 +108,14 @@ export function RevealImage({
           scrollTrigger: { trigger: ref.current, start: "top 85%" },
         },
       );
-      gsap.from(ref.current.querySelector("img"), {
-        scale: 1.35,
-        duration: 1.8,
-        ease: "power3.out",
-        scrollTrigger: { trigger: ref.current, start: "top 85%" },
-      });
+      if (zoom) {
+        gsap.from(ref.current.querySelector("img"), {
+          scale: 1.35,
+          duration: 1.8,
+          ease: "power3.out",
+          scrollTrigger: { trigger: ref.current, start: "top 85%" },
+        });
+      }
     }, ref);
     return () => ctx.revert();
   }, []);
